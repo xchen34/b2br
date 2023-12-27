@@ -1,4 +1,3 @@
-[TOC]
 
 # B2BR QUESTIONS
 
@@ -204,10 +203,9 @@ use ssh as new user: (in your original terminal)  ssh xxx@127.0.0.1 -p 4241  #`$
 root can't use ssh: ssh root@127.0.0.1 -p 4241   #insert password if "denied or refuse" means ok
 
 ## Script
-script monitoring.sh 
-(uname -a)  affiche info sur la machine sur laquelle le os est execute   -a all
 ### explain the script `$ sudo vim /usr/local/bin/monitoring.sh`
 ```
+(uname -a)  affiche info sur la machine sur laquelle le os est execute   -a all
 #the current available RAM and its utilization rate . RAM MEMORY
 usedram=$(free -m | awk '$1=="Mem:" {print $3}')
 totalram=$(free -m | awk '$1=="Mem:" {printf "%dMB", $2}')
@@ -269,15 +267,19 @@ sudocmds=$(journalctl _COMM=sudo | grep "COMMAND" | wc -l)
 
 ### how to set the cron 
 ` $crontab -u root -e `\   
-`*/10 * * * * /usr/local/bin/monitoring.sh` #minutes(0-59), heures(0-23), jour du mois(1-31), mois(1-12) jour de la semaine(1-7) suivis par la commande à exécuter.  
+`*/10 * * * * /usr/local/bin/monitoring.sh` #minutes(0-59), heures(0-23), jour du mois(1-31), mois(1-12) jour de la semaine(1-7) suivis par la commande à exécuter.    
+Check root's scheduled cron jobs: `$sudo crontab -u root -l`   
 
 ### run it every minute
 ` $crontab -u root -e `\  
-`* * * * * /usr/local/bin/monitoring.sh` or `*/1 * * * * /usr/local/bin/monitoring.sh`  # each* stands every unit of time.
-### stop cron without modifying crontab
-
-(need to `$sudo reboot`)
-
+`* * * * * /usr/local/bin/monitoring.sh` or `*/1 * * * * /usr/local/bin/monitoring.sh`  # each* stands every unit of time.  
+### stop cron without modifying crontab  
+`$ sudo service cron stop`  #stop cron immediately but not after reboot
+`$ sudo systemctl disable cron` #disable cron service at boot
+(need to `$sudo reboot`)  
+`$ sudo service cron start`
+`$ systemctl enable cron`. #enable cron service at boot
+    
 
 ## Bonus
 lynx
