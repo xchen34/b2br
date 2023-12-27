@@ -82,7 +82,37 @@ Cron permet de programmer des tâches pour qu'elles s'exécutent automatiquement
 Crontab (Cron Table) : La configuration de cron est stockée dans un fichier appelé "crontab". Chaque utilisateur sur un système peut avoir son propre crontab, en plus d'un crontab système pour des tâches administratives.\
 Syntaxe de Crontab : La syntaxe de crontab définit quand et comment les tâches doivent être exécutées. Elle inclut des champs pour les minutes, les heures, le jour du mois, le mois et le jour de la semaine, suivis par la commande à exécuter.  
 
+## Password policy advantagesssssssssssss
+### Avantages de la Politique de Mot de Passe :
+- Amélioration de la Sécurité : Une politique de mot de passe stricte augmente la sécurité des comptes en exigeant des mots de passe plus complexes (longueur, types de caractères, etc.).
+- Prévention des Accès Non Autorisés : Les mots de passe complexes sont plus difficiles à deviner ou à pirater, réduisant ainsi le risque d'accès non autorisé.
+- Conformité aux Meilleures Pratiques de Sécurité : Le changement régulier de mot de passe et les exigences de complexité sont conformes aux meilleures pratiques de sécurité en ligne.
+- Réduction du Risque de Réutilisation des Mots de Passe : En exigeant que les nouveaux mots de passe diffèrent significativement des anciens, on diminue la tendance des utilisateurs à réutiliser les anciens mots de passe ou des mots de passe similaires.
+### Avantages de l'Implémentation :
+- Automatisation et Uniformité : L'application de la politique de mot de passe via PAM (Pluggable Authentication Modules) assure que tous les utilisateurs suivent les mêmes règles.
+- Flexibilité : Les administrateurs peuvent ajuster la politique de mot de passe selon les besoins, comme modifier la longueur minimale du mot de passe, les exigences de complexité, etc.
+- Feedback Immédiat : Les utilisateurs reçoivent immédiatement des retours d'information si le mot de passe créé ou modifié ne respecte pas les exigences de la politique.
+
+### Inconvénients de l'Implémentation :
+- Inconvénient pour les Utilisateurs : Des exigences plus strictes peuvent rendre les mots de passe difficiles à retenir, conduisant les utilisateurs à les noter ou à utiliser des gestionnaires de mots de passe.
+- Coût de Gestion : La maintenance et la mise à jour des politiques de mot de passe peuvent nécessiter un travail administratif et de surveillance supplémentaire.
+- Résistance Potentielle des Utilisateurs : Les utilisateurs peuvent être mécontents ou dérangés par la nécessité de changer fréquemment de mots de passe complexes.
+
+## Interets et fonctionnement de SUDO with exemples:
+sudo(superuser do") est une commande essentielle dans les systèmes Linux et Unix, permettant aux utilisateurs ordinaires d'exécuter des commandes en tant qu'un autre utilisateur, généralement l'utilisateur superuser (root). Cela est crucial pour la gestion du système et le contrôle des permissions. 
+### avantages:
+  - Sécurité: les administrateurs système peuvent attribuer des permissions d'administrateur spécifiques aux utilisateurs ordinaires sans partager le mot de passe du compte root. Cela réduit l'accès direct au compte root et augmente la sécurité du système.\
+    - Suivi : Enregistre toutes les commandes exécutées avec sudo, facilitant l'audit des activités des utilisateurs.
+### Fonctionnement de sudo
+- L'utilisateur exécute une commande précédée de sudo.
+- Le système vérifie les droits de l'utilisateur dans le fichier /etc/sudoers.
+- Si autorisé, l'utilisateur entre son mot de passe.
+- La commande est exécutée avec les privilèges de root ou de l'utilisateur spécifié.
+exemple:  sudo vim /etc/sudoers      si pas de 'sudo' on peut pas voir le contenu du fichier
+
+
 # Commands 
+AppArmor: `$ service apparmor status`\
 ## simple setup
 interface graphique?  \
 `$ dpkg -l | grep gnome`  or `$ dpkg -l | grep kde`  \
@@ -97,6 +127,75 @@ debian installé?:  \
 leochen dans user42 et sudo?:  \
 `$ getent group user42'  '$ getent group sudo`  \
 creer new user and add to groups:\
+`$ sudo adduser <xxx>`
+`$ sudo addgroup evaluating`
+`$ sudo adduser <xxx> evaluation`
+`$ sudo passwd <xxx>`  #change pswd  `$ sudo chage -l <xxx>` #check password policy for xxx
+`$ getent group evaluating`
+
+#Install Password Quality Checking Library $sudo apt install libpam-pwquality and then modify the config in differents files
+`$ vim /etc/security/pwquality.conf` or `$ vim /etc/pam.d/common-password`
+```
+difok = 7   
+minlen = 10  
+dcredit = -1  
+ucredit = -1  
+lcredit = -1   
+maxrepeat = 3   
+usercheck = 1 (common-password里面是reject_username)
+retry = 3   
+enforce_for_root
+```
+
+`$ vim /etc/login.defs`\
+```
+PASS_MAX_DAYS	30      
+PASS_MIN_DAYS	2    
+PASS_WARN_AGE 7
+```
+
+## hostname and partitions
+Check current hostname:  `$ hostnamectl`\
+Change the hostname: `$ hostnamectl set-hostname <new_hostname>`\
+Change /etc/hosts file: `$ sudo vim /etc/hosts`\
+Change old_hostname with new_hostname:\
+127.0.0.1       localhost\
+127.0.0.1       new_hostname\
+Reboot and check the change: `$ sudo reboot`\
+
+check partition `$ lsblk` 
+
+## sudo
+sudo installed?: ` $dpkg -l | grep sudo` or `$ sudo -V` or `$which sudo`
+add new user to sudo group: `$sudo adduser <xxx> sudo  ` check `sudo groups xxx ` or `sudo getent group sudo`
+la mise en place des regles strictes de SUDO:
+`$ mkdir /var/log/sudo`
+`$ touch /var/log/sudo/sudo.log` 
+`$ sudo vim /etc/sudoers`  or `sudo visudo`
+```
+Defaults    passwd_tries=3 #3 tentative pour utilise le sudo
+Defaults    badpass_message="<you message when some enter a wrong password>"
+Defaults    logfile="/var/log/sudo/sudo.log"
+Defaults    log_input,log_output On souhaite récupérer les log d'inpute et d output
+Defaults    requiretty  #Requiretty exige une console pour utiliser sudo
+Defaults    secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin“
+```
+check sudo.log exsistence and its content
+`$ cd /var/log/sudo`
+`$ ls`  #check if at least sudo.log file
+`$ cat sudo.log` #see its content
+run a command and re-check sudo.log `$sudo apt update`
+`$ cat sudo.log` #see last line
+exemple avec sudo: ` $sudo vim /etc/sudoers` #si pas de 'sudo' on peut pas voir le contenu du fichier
+
+## UFW
+
+## SSH
+
+## Script
+
+## Bonus
+
 
 
 
