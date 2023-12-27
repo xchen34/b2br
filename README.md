@@ -81,3 +81,20 @@ Les adresses IPv6 sont généralement représentées en hexadécimal (par exempl
 Cron permet de programmer des tâches pour qu'elles s'exécutent automatiquement à des moments précis, par exemple tous les jours à minuit, chaque semaine le lundi, ou même toutes les heures.
 Crontab (Cron Table) : La configuration de cron est stockée dans un fichier appelé "crontab". Chaque utilisateur sur un système peut avoir son propre crontab, en plus d'un crontab système pour des tâches administratives.
 Syntaxe de Crontab : La syntaxe de crontab définit quand et comment les tâches doivent être exécutées. Elle inclut des champs pour les minutes, les heures, le jour du mois, le mois et le jour de la semaine, suivis par la commande à exécuter.
+
+# Commands 
+## simple setup
+interface graphique?
+'$ dpkg -l | grep gnome'  or '$ dpkg -l | grep kde' 
+ssh lancé? :
+'$ sudo service ssh status'
+ufw lancé?:
+'$ sudo ufw status numbered'
+debian installé?:
+'$ uname -a' or 'cat /etc/debian_version'
+
+## user
+leochen dans user42 et sudo?:
+'$ getent group use42'  '$ getent group sudo'
+
+
