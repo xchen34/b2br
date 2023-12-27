@@ -47,7 +47,7 @@ Avec LVM, vous pouvez redimensionner les volumes logiques à la volée, c'est-à
 sda : représente généralement le premier disque dur dans un système Linux.   \
 sda1, sda2, sda5, etc. : sont des partitions sur le disque sda.   \
 sda1, sda2 : sont généralement des partitions primaires.   \
-sda5 : est souvent une partition logique (dans le système de partitionnement traditionnel, les partitions logiques commencent à partir du numéro 5).  \
+sda5 : est souvent une partition logique (dans le système de partitionnement traditionnel, les partitions logiques commencent à partir du numéro 5).  
 
 /boot : Contient les fichiers nécessaires au démarrage du système, y compris le noyau Linux et le chargeur de démarrage (GRUB, par exemple).\
 /root : Le répertoire personnel de l'utilisateur root (superutilisateur).  \
@@ -56,16 +56,16 @@ sda5 : est souvent une partition logique (dans le système de partitionnement tr
 /home : Répertoires personnels des utilisateurs. Contient les fichiers personnels, les configurations, etc.  \
 /var : Contient des données variables, comme les journaux, les mails, les bases de données, etc.  \
 /srv : Répertoire pour les données de service. Certains systèmes stockent ici les fichiers de sites web ou d'autres services. \ 
-/tmp : Répertoire pour les fichiers temporaires. Généralement effacé au redémarrage du système.  \
+/tmp : Répertoire pour les fichiers temporaires. Généralement effacé au redémarrage du système.  
 
 ##SSH
 SSH (Secure Shell) est un protocole de réseau utilisé pour établir une communication sécurisée entre un client et un serveur.\
 Accès à Distance : Il est couramment utilisé pour se connecter à distance à des serveurs et à d'autres systèmes. Par exemple, vous pouvez utiliser SSH pour gérer un serveur Linux à distance.  \
 Authentification : SSH prend en charge plusieurs méthodes d'authentification, y compris les mots de passe et les clés SSH, cette dernière étant la méthode la plus sécurisée. \  
-Port Standard : Le port TCP standard pour SSH est 22. \
+Port Standard : Le port TCP standard pour SSH est 22. 
 
 ## UFW
-UFW (Uncomplicated Firewall) est un outil de configuration de pare-feu pour les systèmes basés sur Unix, notamment Linux. Il vise à simplifier la gestion des iptables, qui est le pare-feu intégré dans le noyau Linux. Avec UFW, vous pouvez facilement définir des règles qui contrôlent le trafic entrant et sortant. Ces règles peuvent être basées sur des ports, des protocoles et des adresses IP.  \
+UFW (Uncomplicated Firewall) est un outil de configuration de pare-feu pour les systèmes basés sur Unix, notamment Linux. Il vise à simplifier la gestion des iptables, qui est le pare-feu intégré dans le noyau Linux. Avec UFW, vous pouvez facilement définir des règles qui contrôlent le trafic entrant et sortant. Ces règles peuvent être basées sur des ports, des protocoles et des adresses IP.  
 
 TCP est un protocole de communication fondamental utilisé dans les réseaux informatiques, notamment sur Internet. TCP est conçu pour fournir une communication fiable entre deux hôtes.   \
 IPv4 et IPv6  \
@@ -75,12 +75,12 @@ Il utilise des adresses de 32 bits, généralement représentées sous forme dé
 En raison de la limitation du nombre d'adresses, IPv4 est progressivement remplacé par IPv6.\
 IPv6 (Internet Protocol version 6) :  \
 Il utilise des adresses de 128 bits, offrant un espace d'adressage considérablement plus vaste.\
-Les adresses IPv6 sont généralement représentées en hexadécimal (par exemple, 2001:0db8:85a3:0000:0000:8a2e:0370:7334).\
+Les adresses IPv6 sont généralement représentées en hexadécimal (par exemple, 2001:0db8:85a3:0000:0000:8a2e:0370:7334).
 
 ## Cron?
 Cron permet de programmer des tâches pour qu'elles s'exécutent automatiquement à des moments précis, par exemple tous les jours à minuit, chaque semaine le lundi, ou même toutes les heures.  \
 Crontab (Cron Table) : La configuration de cron est stockée dans un fichier appelé "crontab". Chaque utilisateur sur un système peut avoir son propre crontab, en plus d'un crontab système pour des tâches administratives.\
-Syntaxe de Crontab : La syntaxe de crontab définit quand et comment les tâches doivent être exécutées. Elle inclut des champs pour les minutes, les heures, le jour du mois, le mois et le jour de la semaine, suivis par la commande à exécuter.  \
+Syntaxe de Crontab : La syntaxe de crontab définit quand et comment les tâches doivent être exécutées. Elle inclut des champs pour les minutes, les heures, le jour du mois, le mois et le jour de la semaine, suivis par la commande à exécuter.  
 
 # Commands 
 ## simple setup
@@ -91,10 +91,12 @@ ssh lancé? :  \
 ufw lancé?:  \
 `$ sudo ufw status numbered`  \
 debian installé?:  \
-`$ uname -a' or 'cat /etc/debian_version `  \
+`$ uname -a' or 'cat /etc/debian_version `  
 
 ## user
 leochen dans user42 et sudo?:  \
-`$ getent group use42'  '$ getent group sudo`  \
+`$ getent group user42'  '$ getent group sudo`  \
+creer new user and add to groups:\
+
 
 
