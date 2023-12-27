@@ -85,16 +85,16 @@ Syntaxe de Crontab : La syntaxe de crontab définit quand et comment les tâches
 # Commands 
 ## simple setup
 interface graphique?
-'$ dpkg -l | grep gnome'  or '$ dpkg -l | grep kde' 
+'''$ dpkg -l | grep gnome'  or '$ dpkg -l | grep kde'''
 ssh lancé? :
-'$ sudo service ssh status'
+'''$ sudo service ssh status'''
 ufw lancé?:
-'$ sudo ufw status numbered'
+'''$ sudo ufw status numbered'''
 debian installé?:
-'$ uname -a' or 'cat /etc/debian_version'
+'''$ uname -a' or 'cat /etc/debian_version'''
 
 ## user
 leochen dans user42 et sudo?:
-'$ getent group use42'  '$ getent group sudo'
+'''$ getent group use42'  '$ getent group sudo'''
 
 
