@@ -1,6 +1,6 @@
-#B2BR QUESTIONS
+# B2BR QUESTIONS
 
-##Virtual Machine? 
+## Virtual Machine? 
 Une machine virtuelle (VM) est un logiciel qui simule un système informatique et peut exécuter des programmes comme un vrai ordinateur.
 La virtualisation permet de partager un système avec plusieurs environnements virtuels. L'hyperviseur gère le système matériel et sépare les ressources physiques des environnements virtuels. Les ressources sont gérées en fonction des besoins, de l' hôte aux invités (guests). Lorsqu'un utilisateur d'une machine virtuelle (VM) effectue une tâche nécessitant des ressources supplémentaires de l'environnement physique, l'hyperviseur gère la demande pour que le système d'exploitation invité puisse accéder aux ressources de l'environnement physique. 
 Avantages:
@@ -8,7 +8,7 @@ Avantages:
 - Isolation et Sécurité (isolation entre les VM améliore la sécurité. Un problème sur une VM n'affecte pas les autres VM)
 - Développement et Test (idéales pour le développement et le test sans risquer le système principal)
 
-##Choice of operating system? Differences between Rocky and Debian?
+## Choice of operating system? Differences between Rocky and Debian?
 Debian, comme c’est recommandé pour les débutants à l’adm du système d’info. Il est plus facile à installer et à trouver des documentations.
 Différences:
 - Histoire
@@ -30,16 +30,16 @@ Rocky Linux : Emploie SELinux, hérité de RHEL, offrant une sécurité renforc�
 Debian : Utilise le gestionnaire de paquets apt, reconnu pour sa facilité d'utilisation.
 Rocky Linux : Utilise yum et dnf, similaires à ceux de RHEL/CentOS, et appréciés pour leur flexibilité.
 
-##Differences between aptitude and apt? 
+## Differences between aptitude and apt? 
 Tous les deux sont des outils gestionnaire de parquet: Advanced Packaging Tool (apt) et aptitude. Le gestionnaire de paquets par défaut est dpkg.  Cependant, dans la plupart des cas, les parquets qu’on veut installer viennent avec une liste de dépendances qui doivent être installées pour que le programme principal fonctionne correctement. Une option est d'installer manuellement ces dépendances. Cependant, avec pat qui utilise dpkg peut installer toutes les dépendances nécessaires lors de l'installation d'un programme. Nous pouvons donc maintenant installer un programme utile avec une seule commande.
 Apt offre une interface en ligne de commande, tandis qu'aptitude offre une interface graphique.
 Face à un conflit de paquets, apt ne résoudra pas le problème tandis qu'aptitude suggérera une résolution qui peut faire l'affaire.
 ​Apt nécessite que l'utilisateur ait une solide connaissance des systèmes Linux et de la gestion des paquets car tout se fait en ligne de commande. Cela peut être difficile pour un novice.
 
-##What’s APPArmor?
+## What’s APPArmor?
 AppArmor (Application Armor) est un logiciel de sécurité pour Linux. Elle permet à l'administrateur système d'associer à chaque programme un profil de sécurité qui restreint ses accès au système d'exploitation, une sécurité de type Contrôle d'Accès Obligatoire (MAC).  Les profils peuvent fonctionner en mode plainte (complain-mode) et en mode application (enforce-mode). En mode application, AppArmor interdit aux applications d'effectuer des tâches restreintes. En mode plainte, AppArmor autorise les applications à réaliser ces tâches, mais crée une entrée dans le registre pour afficher la plainte. 
 
-##LVM
+## LVM
 LVM est un outil de gestion de volumes logiques pour les systèmes Linux. Il permet de gérer l'espace disque de manière plus flexible qu'avec la gestion traditionnelle des partitions. Avec LVM, vous pouvez :
 LVM permet de créer un ou plusieurs "groupes de volumes" qui regroupent l'espace de plusieurs disques physiques.
 Au sein d'un groupe de volumes, vous pouvez créer des "volumes logiques". Ces volumes logiques fonctionnent comme des partitions, mais ils sont beaucoup plus flexibles.
@@ -64,7 +64,7 @@ Accès à Distance : Il est couramment utilisé pour se connecter à distance à
 Authentification : SSH prend en charge plusieurs méthodes d'authentification, y compris les mots de passe et les clés SSH, cette dernière étant la méthode la plus sécurisée.
 Port Standard : Le port TCP standard pour SSH est 22.
 
-##UFW
+## UFW
 UFW (Uncomplicated Firewall) est un outil de configuration de pare-feu pour les systèmes basés sur Unix, notamment Linux. Il vise à simplifier la gestion des iptables, qui est le pare-feu intégré dans le noyau Linux. Avec UFW, vous pouvez facilement définir des règles qui contrôlent le trafic entrant et sortant. Ces règles peuvent être basées sur des ports, des protocoles et des adresses IP.
 
 TCP est un protocole de communication fondamental utilisé dans les réseaux informatiques, notamment sur Internet. TCP est conçu pour fournir une communication fiable entre deux hôtes. 
@@ -77,7 +77,7 @@ IPv6 (Internet Protocol version 6) :
 Il utilise des adresses de 128 bits, offrant un espace d'adressage considérablement plus vaste.
 Les adresses IPv6 sont généralement représentées en hexadécimal (par exemple, 2001:0db8:85a3:0000:0000:8a2e:0370:7334).
 
-##Cron?
+## Cron?
 Cron permet de programmer des tâches pour qu'elles s'exécutent automatiquement à des moments précis, par exemple tous les jours à minuit, chaque semaine le lundi, ou même toutes les heures.
 Crontab (Cron Table) : La configuration de cron est stockée dans un fichier appelé "crontab". Chaque utilisateur sur un système peut avoir son propre crontab, en plus d'un crontab système pour des tâches administratives.
 Syntaxe de Crontab : La syntaxe de crontab définit quand et comment les tâches doivent être exécutées. Elle inclut des champs pour les minutes, les heures, le jour du mois, le mois et le jour de la semaine, suivis par la commande à exécuter.
