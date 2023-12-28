@@ -270,7 +270,21 @@ Check root's scheduled cron jobs: `$sudo crontab -u root -l`
 (need to `$sudo reboot`)  
 `$ sudo service cron start`
 `$ systemctl enable cron`. #enable cron service at boot
-    
+
+```
+wall "  #Architecture: $arch
+ 46     	#CPU physical: $pcpu
+ 47     	#vCPU: $vcpu
+ 48     	#Memory Usage: $usedram/$totalram ($percentram)
+ 49     	#Disk Usage: $useddisk/$totaldisk ($percentdisk)
+ 50     	#CPU load: $cpuload
+ 51     	#Last boot: $lastboot
+ 52     	#LVM use: $lvmuse
+ 53     	#Connexions TCP: $tcps ESTABLISHED
+ 54     	#User log: $users
+ 55     	#Network: IP $ip ($mac)
+ 56     	#Sudo: $sudocmds cmd"
+```
 
 ## Bonus
 lynx google.com
