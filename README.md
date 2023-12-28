@@ -238,6 +238,21 @@ mac=$(ip link | grep "link/ether" | awk '{print $2}')
 #nbr of commands executed with the sudo program.  SUDO LOG   
 `sudocmds=$(journalctl _COMM=sudo | grep "COMMAND" | wc -l)`  
 
+```
+wall "  #Architecture: $arch
+      	#CPU physical: $pcpu
+      	#vCPU: $vcpu
+      	#Memory Usage: $usedram/$totalram ($percentram)
+      	#Disk Usage: $useddisk/$totaldisk ($percentdisk)
+      	#CPU load: $cpuload
+      	#Last boot: $lastboot
+      	#LVM use: $lvmuse
+      	#Connexions TCP: $tcps ESTABLISHED
+      	#User log: $users
+      	#Network: IP $ip ($mac)
+      	#Sudo: $sudocmds cmd"
+```
+
 ### how to set the cron 
 ` $ sudo crontab -u root -e `\   
 `*/10 * * * * /usr/local/bin/monitoring.sh` #minutes(0-59), heures(0-23), jour du mois(1-31), mois(1-12) jour de la semaine(1-7) suivis par la commande à exécuter.    
@@ -253,20 +268,7 @@ Check root's scheduled cron jobs: `$sudo crontab -u root -l`
 `$ sudo service cron start`
 `$ systemctl enable cron`. #enable cron service at boot
 
-```
-wall "  #Architecture: $arch
-      	#CPU physical: $pcpu
-      	#vCPU: $vcpu
-      	#Memory Usage: $usedram/$totalram ($percentram)
-      	#Disk Usage: $useddisk/$totaldisk ($percentdisk)
-      	#CPU load: $cpuload
-      	#Last boot: $lastboot
-      	#LVM use: $lvmuse
-      	#Connexions TCP: $tcps ESTABLISHED
-      	#User log: $users
-      	#Network: IP $ip ($mac)
-      	#Sudo: $sudocmds cmd"
-```
+
 
 ## Bonus
       
