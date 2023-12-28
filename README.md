@@ -3,8 +3,8 @@
 
 ## Virtual Machine? 
 Une machine virtuelle (VM) est un logiciel qui simule un système informatique et peut exécuter des programmes comme un vrai ordinateur.
-La virtualisation permet de partager un système avec plusieurs environnements virtuels. L'hyperviseur gère le système matériel et sépare les ressources physiques des environnements virtuels. Les ressources sont gérées en fonction des besoins, de l' hôte aux invités (guests). Lorsqu'un utilisateur d'une machine virtuelle (VM) effectue une tâche nécessitant des ressources supplémentaires de l'environnement physique, l'hyperviseur gère la demande pour que le système d'exploitation invité puisse accéder aux ressources de l'environnement physique. \  
-Avantages:  \
+La virtualisation permet de partager un système avec plusieurs environnements virtuels. L'hyperviseur gère le système matériel et sépare les ressources physiques des environnements virtuels. Les ressources sont gérées en fonction des besoins, de l' hôte aux invités (guests). Lorsqu'un utilisateur d'une machine virtuelle (VM) effectue une tâche nécessitant des ressources supplémentaires de l'environnement physique, l'hyperviseur gère la demande pour que le système d'exploitation invité puisse accéder aux ressources de l'environnement physique.    
+Avantages:   
 - Économies (la virtualisation réduit les besoins en matériel)
 - Isolation et Sécurité (isolation entre les VM améliore la sécurité. Un problème sur une VM n'affecte pas les autres VM)
 - Développement et Test (idéales pour le développement et le test sans risquer le système principal)
@@ -257,12 +257,12 @@ mac=$(ip link | grep "link/ether" | awk '{print $2}')
 `sudocmds=$(journalctl _COMM=sudo | grep "COMMAND" | wc -l)`  
 
 ### how to set the cron 
-` $crontab -u root -e `\   
+` $ sudo crontab -u root -e `\   
 `*/10 * * * * /usr/local/bin/monitoring.sh` #minutes(0-59), heures(0-23), jour du mois(1-31), mois(1-12) jour de la semaine(1-7) suivis par la commande à exécuter.    
 Check root's scheduled cron jobs: `$sudo crontab -u root -l`   
 
 ### run it every minute
-` $crontab -u root -e `\  
+` $sudo crontab -u root -e `\  
 `* * * * * /usr/local/bin/monitoring.sh` or `*/1 * * * * /usr/local/bin/monitoring.sh`  # each* stands every unit of time.  
 ### stop cron without modifying crontab  
 `$ sudo service cron stop`  #stop cron immediately but not after reboot
@@ -273,7 +273,24 @@ Check root's scheduled cron jobs: `$sudo crontab -u root -l`
     
 
 ## Bonus
-lynx
+lynx google.com
+nsnake
+Lighttpd 是一个轻量级的 web 服务器。
+MariaDB 是一个流行的数据库管理系统，用于存储网站数据
+PHP 是一种广泛使用的开放源代码的通用脚本语言，尤其适用于 web 开发
+WordPress 是一个流行的内容管理系统。
+- lighttpd: Un serveur web léger et rapide, optimisé pour les environnements à haute performance et faible utilisation de la mémoire.
+
+- MariaDB: Un système de gestion de base de données relationnelle, fork de MySQL, offrant des fonctionnalités avancées, une stabilité et une performance améliorées.
+
+- wget: Un outil en ligne de commande pour télécharger des fichiers depuis le web, supportant HTTP, HTTPS et FTP, et capable de reprendre des téléchargements interrompus.
+
+- PHP: Un langage de programmation largement utilisé pour le développement web, particulièrement adapté pour générer du contenu web dynamique.
+
+- WordPress: Un système de gestion de contenu (CMS) open-source, extrêmement populaire, utilisé pour créer et gérer des sites web variés, des blogs personnels aux sites e-commerce complexes.
+
+- Lynx: Un navigateur web en mode texte, permettant de naviguer sur Internet sans interface graphique, utile pour les systèmes sans environnement graphique ou pour l'automatisation de tâches web.
+
 
 
 
