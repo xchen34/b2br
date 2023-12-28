@@ -59,7 +59,7 @@ sda5 : est souvent une partition logique (dans le système de partitionnement tr
 /srv : Répertoire pour les données de service. Certains systèmes stockent ici les fichiers de sites web ou d'autres services. \ 
 /tmp : Répertoire pour les fichiers temporaires. Généralement effacé au redémarrage du système.  
 
-##SSH
+## SSH
 SSH (Secure Shell) est un protocole de réseau utilisé pour établir une communication sécurisée entre un client et un serveur.\
 Accès à Distance : Il est couramment utilisé pour se connecter à distance à des serveurs et à d'autres systèmes. Par exemple, vous pouvez utiliser SSH pour gérer un serveur Linux à distance.  \
 Authentification : SSH prend en charge plusieurs méthodes d'authentification, y compris les mots de passe et les clés SSH, cette dernière étant la méthode la plus sécurisée. \  
@@ -78,7 +78,7 @@ IPv6 (Internet Protocol version 6) :  \
 Il utilise des adresses de 128 bits, offrant un espace d'adressage considérablement plus vaste.\
 Les adresses IPv6 sont généralement représentées en hexadécimal (par exemple, 2001:0db8:85a3:0000:0000:8a2e:0370:7334).
 
-## Cron?
+## Cron
 Cron permet de programmer des tâches pour qu'elles s'exécutent automatiquement à des moments précis, par exemple tous les jours à minuit, chaque semaine le lundi, ou même toutes les heures.  \
 Crontab (Cron Table) : La configuration de cron est stockée dans un fichier appelé "crontab". Chaque utilisateur sur un système peut avoir son propre crontab, en plus d'un crontab système pour des tâches administratives.\
 Syntaxe de Crontab : La syntaxe de crontab définit quand et comment les tâches doivent être exécutées. Elle inclut des champs pour les minutes, les heures, le jour du mois, le mois et le jour de la semaine, suivis par la commande à exécuter.  
@@ -204,66 +204,57 @@ root can't use ssh: ssh root@127.0.0.1 -p 4241   #insert password if "denied or 
 
 ## Script
 ### explain the script `$ sudo vim /usr/local/bin/monitoring.sh`
+
+`(uname -a)` #affiche info sur la machine y compris le nom du noyau, le nom d'hôte, la version du noyau, l'architecture matérielle, etc.   
 ```
-(uname -a)  affiche info sur la machine sur laquelle le os est execute   -a all
-#the current available RAM and its utilization rate . RAM MEMORY
-usedram=$(free -m | awk '$1=="Mem:" {print $3}')
-totalram=$(free -m | awk '$1=="Mem:" {printf "%dMB", $2}')
-percentram=$(free -m | awk '$1=="Mem:" {printf "%.2f%%", $3/$2*100}')
-ce script collecte et formate des informations sur l'utilisation de la mémoire RAM, la mémoire totale et le pourcentage d'utilisation, puis les stocke dans les variables usedram, totalram et percentram pour une utilisation ultérieure 
-free -m : Exécute la commande free avec l'option -m pour afficher les informations sur la mémoire en mégaoctets (MB).
-
-useddisk=$(df -m | grep "/dev/" | grep -v "/boot/" | awk '{used+=$3} END {print used}')
-collecte des donnees sur l'espace disque disponible et son taux d'utilisation actuel.
-	df -m : Exécute la commande df avec l'option -m pour afficher les informations sur l'utilisation de l'espace disque en mégaoctets (MB).
-	grep "/dev/" : Filtre les lignes qui contiennent "/dev/", car elles représentent les périphériques de stockage.
-	grep -v "/boot/" : Exclut les lignes qui contiennent "/boot/", car elles ne sont pas pertinentes pour l'utilisation de l'espace disque principal.
-	awk '{used+=$3} END {print used}' : Utilise awk pour calculer la somme des valeurs de la colonne 3 (utilisation d'espace disque) de toutes les lignes correspondantes. Ensuite, il affiche la somme calculée dans la variable useddisk.
-
-totaldisk=$(df -m | grep "/dev/" | grep -v "/boot/" | awk '{total+=$2} END {printf "%.0fGb", total}') 
-	
-percentdisk=$(df -m | grep "/dev/" | grep -v "/boot/" | awk '{used+=$3} {total+=$2} END {printf "%d%%", used/total*100}') 
-awk '{used+=$3} {total+=$2} END {printf "%d%%", used/total*100}' : Utilise awk pour calculer le pourcentage d'utilisation de l'espace disque en additionnant les valeurs de la colonne 3 (utilisation d'espace disque) et de la colonne 2 (espace disque total) pour toutes les lignes correspondantes. Ensuite, il formate ce pourcentage en une chaîne de caractères avec le symbole "%" à la fin, puis stocke le résultat dans la variable percentdisk
-
-#current utilization rate of your processors as percentage. 
-CPU LOAD idlecpu=$(vmstat 1 2 | tail -n 1 | awk '{print $(NF-2)}') 
+usedram=$(free -m | awk '$1=="Mem:" {print $3}')   
+totalram=$(free -m | awk '$1=="Mem:" {printf "%dMB", $2}')   
+percentram=$(free -m | awk '$1=="Mem:" {printf "%.2f%%", $3/$2*100}')   
+```    
+#free -m : afficher info sur la mémoire en mégaoctets (MB).   
+```   
+useddisk=$(df -m | grep "/dev/" | grep -v "/boot/" | awk '{used+=$3} END {print used}')    
+totaldisk=$(df -m | grep "/dev/" | grep -v "/boot/" | awk '{total+=$2} END {printf "%.0fGb", total}')    
+percentdisk=$(df -m | grep "/dev/" | grep -v "/boot/" | awk '{used+=$3} {total+=$2} END {printf "%d%%", used/total*100}')   
+```     
+#df -m : afficher info sur l'utilisation de l'espace disque en mégaoctets (MB).   
+grep "/dev/" : Filtre les lignes qui contiennent "/dev/", car elles représentent les périphériques de stockage.   
+grep -v "/boot/" : Exclut les lignes qui contiennent "/boot/", car elles ne sont pas pertinentes pour l'utilisation de l'espace disque principal.   
+awk '{used+=$3} END {print used}' : Utilise awk pour calculer la somme des valeurs de la colonne 3 (utilisation d'espace disque) de toutes les lignes  
+correspondantes. Ensuite, il affiche la somme calculée dans la variable useddisk.   
+#awk '{used+=$3} {total+=$2} END {printf "%d%%", used/total*100}' : calculer le pourcentage d'utilisation de l'espace disque en additionnant les valeurs de la colonne 3 (utilisation d'espace disque) et de la colonne 2 (espace disque total) pour toutes les lignes correspondantes. Ensuite, il formate ce pourcentage en une chaîne de caractères avec le symbole "%" à la fin, puis stocke le résultat dans la variable percentdisk   
+```
+idlecpu=$(vmstat 1 2 | tail -n 1 | awk '{print $(NF-2)}') 
 usedcpu=$(expr 100 - $idlecpu) 
-cpuload=$(printf "%.1f%%" $usedcpu) 
-vmstat 1 2 : Exécute la commande vmstat pour afficher les statistiques du système toutes les 1 seconde pendant 2 itérations. Cela permet d'obtenir des informations sur l'utilisation du processeur.
-tail -n 1 : Prend la dernière ligne des résultats de vmstat, car nous sommes principalement intéressés par les statistiques du deuxième cycle. Les premières données collectées sont généralement des moyennes depuis le démarrage du système, tandis que les secondes données fournissent une vue instantanée de l'état actuel du système.
-awk '{print $(NF-2)}' : Utilise awk pour extraire la valeur de la colonne à l'avant-dernière position (NF représente le nombre de champs dans la ligne). Cette valeur représente le pourcentage d'inactivité du processeur (c'est-à-dire le pourcentage de temps où le processeur est inutilisé), et elle est stockée dans la variable idlecpu.
-usedcpu=$(expr 100 - $idlecpu) : Cette ligne calcule le pourcentage d'utilisation du processeur en soustrayant le pourcentage d'inactivité (idlecpu) de 100. Cela donne le pourcentage d'utilisation du processeur, qui est stocké dans la variable usedcpu.
-cpuload=$(printf "%.1f%%" $usedcpu) : Cette ligne formate le résultat en une chaîne de caractères avec une décimale et le symbole "%" à la fin, puis stocke le résultat dans la variable cpuload. Cependant, il est important de noter que le script calcule le taux d'utilisation du processeur en pourcentage, mais il se peut que ce taux soit de 0% si le système est actuellement très peu sollicité et que la majorité des ressources du processeur sont inutilisées.
-En d'autres termes, si le système est pratiquement inactif au moment de l'exécution du script, il est normal que le taux d'utilisation du processeur soit de 0%. Cela signifie que la grande majorité du temps de calcul du processeur est actuellement inutilisée, ce qui est une situation courante lorsque le système n'a pas beaucoup de charges de travail à traiter.
+cpuload=$(printf "%.1f%%" $usedcpu)
+```   
+#vmstat 1 2 :afficher statistiques du système toutes les 1 seconde pendant 2 itérations. Cela permet d'obtenir des informations sur l'utilisation du processeur.
+tail -n 1 : Prend la dernière ligne des résultats de vmstat. La première ligne est généralement les moyennes des données depuis le démarrage du système, tandis que les secondes données fournissent une vue instantanée de l'état actuel du système.   
+awk '{print $(NF-2)}' : Utilise awk pour extraire la valeur de la colonne à l'avant-dernière position (NF représente le nombre de champs dans la ligne).    Cette valeur représente le pourcentage d'inactivité du processeur (c'est-à-dire le pourcentage de temps où le processeur est inutilisé), et elle est stockée dans la variable idlecpu.     
+usedcpu=$(expr 100 - $idlecpu) : Cette ligne calcule le pourcentage d'utilisation du processeur     
+Cependant, il se peut que ce taux soit de 0% si le système est actuellement très peu sollicité et que la majorité des ressources du processeur sont inutilisées. En d'autres termes, si le système est pratiquement inactif au moment de l'exécution du script, il est normal que le taux d'utilisation du processeur soit de 0%.  
 
-#the date and time of last reboot. LAST BOOT
-lastboot=$(who -b | awk '{print $3 " " $4}'
-Ce script en shell vise à obtenir la date et l'heure du dernier redémarrage du système. Voici une explication en français de la commande :
+`lastboot=$(who -b | awk '{print $3 " " $4}'`
+#la date et l'heure du dernier redémarrage du système.   
+who -b : afficher info sur les utilisateurs connectés au système. L'option -b spécifie que nous voulons afficher la date et l'heure du dernier redémarrage du système.
 
-	who -b : La commande who est utilisée pour afficher des informations sur les utilisateurs connectés au système. L'option -b spécifie que nous voulons afficher la date et l'heure du dernier redémarrage du système.
+`lvmuse=$(if [ $(lsblk | grep "lvm" | wc -l) -gt 0 ]; then echo yes; else no; fi)`
+ #déterminer si LVM est actif ou non sur le système.
+lsblk est utilisée pour lister les informations sur les blocs pheripherique du système(périphériques de stockage, y compris les disques, les partitions et les volumes logiques)      
+[ $(...) -gt 0 ] : structure conditionnelle en shell. Elle vérifie si le nombre de volumes LVM trouvés (le résultat de wc -l) est supérieur à zéro. Si c'est le cas, cela signifie qu'au moins un volume LVM est présent, et la condition est évaluée comme vraie (true).   
 
-	awk '{print $3 " " $4}' : Une fois que who -b est exécuté, la sortie est traitée par awk. Cette commande awk extrait la troisième et la quatrième colonne de la sortie de who -b, qui contiennent la date et l'heure du dernier redémarrage. Ces valeurs sont ensuite concaténées avec un espace entre elles, puis stockées dans la variable lastboot.
+`tcps=$(ss -ta | grep "ESTAB" | wc -l)`   
+#compter le nombre de connexions TCP actives sur le système
+ss est utilisée pour afficher des informations sur les sockets réseau, et l'option -ta spécifie que nous voulons afficher toutes les connexions TCP (tant établies que non établies)   
 
-#whether LVM is active or not. LVM USE
-lvmuse=$(if [ $(lsblk | grep "lvm" | wc -l) -gt 0 ]; then echo yes; else no; fi)
- déterminer si LVM (Logical Volume Manager) est actif ou non sur le système.
-lsblk est utilisée pour lister les informations sur les blocs pheripherique du système. Elle renvoie une liste des périphériques de stockage, y compris les disques, les partitions et les volumes logiques   
-[ $(...) -gt 0 ] : Cette partie de la commande est une structure conditionnelle en shell. Elle vérifie si le nombre de volumes LVM trouvés (le résultat de wc -l) est supérieur à zéro. Si c'est le cas, cela signifie qu'au moins un volume LVM est présent, et la condition est évaluée comme vraie (true).
+#nbr of users using the server. USER COUNT   
+`users=$(users | wc -w)`   
 
-#nbr of active connections. TCP CONNECTIONS
-tcps=$(ss -ta | grep "ESTAB" | wc -l)
-compter le nombre de connexions TCP actives sur le système
-ss est utilisée pour afficher des informations sur les sockets réseau, et l'option -ta spécifie que nous voulons afficher toutes les connexions TCP (tant établies que non établies)
-
-#nbr of users using the server. USER COUNT
-users=$(users | wc -w)
-
-ip=$(hostname -I)
+ip=$(hostname -I)  
 mac=$(ip link | grep "link/ether" | awk '{print $2}')
 
-#nbr of commands executed with the sudo program.  SUDO LOG
-sudocmds=$(journalctl _COMM=sudo | grep "COMMAND" | wc -l)
-```
+#nbr of commands executed with the sudo program.  SUDO LOG   
+`sudocmds=$(journalctl _COMM=sudo | grep "COMMAND" | wc -l)`  
 
 ### how to set the cron 
 ` $crontab -u root -e `\   
