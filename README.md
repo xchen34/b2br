@@ -136,24 +136,6 @@ creer new user and add to groups:\
 
 #Install Password Quality Checking Library $sudo apt install libpam-pwquality and then modify the config in differents files
 `$ vim /etc/security/pwquality.conf` or `$ vim /etc/pam.d/common-password`
-```
-difok = 7   
-minlen = 10  
-dcredit = -1  
-ucredit = -1  
-lcredit = -1   
-maxrepeat = 3   
-usercheck = 1 (common-password里面是reject_username)
-retry = 3   
-enforce_for_root
-```
-
-`$ vim /etc/login.defs`\
-```
-PASS_MAX_DAYS	30      
-PASS_MIN_DAYS	2    
-PASS_WARN_AGE 7
-```
 
 ## hostname and partitions
 Check current hostname:  `$ hostnamectl`\
