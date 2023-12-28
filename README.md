@@ -273,26 +273,27 @@ Check root's scheduled cron jobs: `$sudo crontab -u root -l`
 
 ```
 wall "  #Architecture: $arch
- 46     	#CPU physical: $pcpu
- 47     	#vCPU: $vcpu
- 48     	#Memory Usage: $usedram/$totalram ($percentram)
- 49     	#Disk Usage: $useddisk/$totaldisk ($percentdisk)
- 50     	#CPU load: $cpuload
- 51     	#Last boot: $lastboot
- 52     	#LVM use: $lvmuse
- 53     	#Connexions TCP: $tcps ESTABLISHED
- 54     	#User log: $users
- 55     	#Network: IP $ip ($mac)
- 56     	#Sudo: $sudocmds cmd"
+      	#CPU physical: $pcpu
+      	#vCPU: $vcpu
+      	#Memory Usage: $usedram/$totalram ($percentram)
+      	#Disk Usage: $useddisk/$totaldisk ($percentdisk)
+      	#CPU load: $cpuload
+      	#Last boot: $lastboot
+      	#LVM use: $lvmuse
+      	#Connexions TCP: $tcps ESTABLISHED
+      	#User log: $users
+      	#Network: IP $ip ($mac)
+      	#Sudo: $sudocmds cmd"
 ```
 
 ## Bonus
-lynx google.com
-nsnake
+      
+
 Lighttpd 是一个轻量级的 web 服务器。
 MariaDB 是一个流行的数据库管理系统，用于存储网站数据
 PHP 是一种广泛使用的开放源代码的通用脚本语言，尤其适用于 web 开发
 WordPress 是一个流行的内容管理系统。
+
 - lighttpd: Un serveur web léger et rapide, optimisé pour les environnements à haute performance et faible utilisation de la mémoire.
 
 - MariaDB: Un système de gestion de base de données relationnelle, fork de MySQL, offrant des fonctionnalités avancées, une stabilité et une performance améliorées.
@@ -306,5 +307,6 @@ WordPress 是一个流行的内容管理系统。
 - Lynx: Un navigateur web en mode texte, permettant de naviguer sur Internet sans interface graphique, utile pour les systèmes sans environnement graphique ou pour l'automatisation de tâches web.
 
 
-
+lynx google.com   
+nsnake  
 
