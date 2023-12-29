@@ -136,6 +136,24 @@ creer new user and add to groups:\
 
 #Install Password Quality Checking Library $sudo apt install libpam-pwquality and then modify the config in differents files
 `$ vim /etc/security/pwquality.conf` or `$ vim /etc/pam.d/common-password`
+```
+difok = 7  新密码必须至少有7字符不同于旧密码. root改密码不需要就密码所以这条默认不适用root 
+minlen = 10  #密码最小长度为 10 个字符
+dcredit = -1   #至少需要一个数字
+ucredit = -1   #至少需要一个大写字母uppercase
+lcredit = -1    #至少需要一个小写字母lowercase
+maxrepeat = 3   #密码中最多可以有 3 个连续相同的字符
+usercheck = 1   #启用用户名检查，以确保密码中不包含用户名的部分 (common-password里面是打reject_username)
+retry = 3   #在密码验证失败时，用户有 3 次重试机会
+enforce_for_root   #以上规则也适用于 root 用户
+```
+
+$ nano /etc/login.defs
+```
+PASS_MAX_DAYS	30       # tous les 30 jour un nouveaux mot de passe
+PASS_MIN_DAYS	2    #Vous pouvez changer un mot de passe seulement tout les 2 jour
+保留 PASS_WARN_AGE 7  # Une alerte sera envoyée 7 jour avant la date de changement de mot de passe
+```
 
 ## hostname and partitions
 Check current hostname:  `$ hostnamectl`\
