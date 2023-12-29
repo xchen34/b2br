@@ -113,15 +113,15 @@ exemple:  sudo vim /etc/sudoers      si pas de 'sudo' on peut pas voir le conten
 
 
 # Commands 
-AppArmor: `$ service apparmor status`\
+AppArmor: `$ service apparmor status`
 ## simple setup
 interface graphique?  \
-`$ dpkg -l | grep gnome`  or `$ dpkg -l | grep kde`  \
-ssh lancé? :  \
-` $ sudo service ssh status `  \
-ufw lancé?:  \
-`$ sudo ufw status numbered`  \
-debian installé?:  \
+`$ dpkg -l | grep gnome`  or `$ dpkg -l | grep kde`   
+ssh lancé? :    
+` $ sudo service ssh status `     
+ufw lancé?:     
+`$ sudo ufw status numbered`     
+debian installé?:     
 `$ uname -a' or 'cat /etc/debian_version `  
 
 ## user
